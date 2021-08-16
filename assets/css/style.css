@@ -1,0 +1,109 @@
+*{
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0;
+}
+
+:root {
+    --primary: #351c75;
+    --secondary: #bd60e7;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    margin: 40px;
+}
+
+nav{
+font-size: 1.5vw;
+margin-bottom: 4%;
+}
+
+.nav-style {
+    display: flex;
+}
+
+.high-scores {
+    float: left;
+    color: var(--secondary);
+}
+
+.time-display {
+    float: right;
+}
+
+.content-container, .button-container {
+    display: flex;
+    margin: 1.75%;
+    justify-content: center;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 3.25vw;
+    line-height: 120%;
+}
+
+.paragraph {
+    font-size: 2vw;
+    text-align: center;
+    font-weight: 300;
+    line-height: 115%;
+}
+
+.button{
+    font-family: Roboto, sans-serif;
+    background-color: var(--primary);
+    color: white;
+    font-size: 2vw;
+    padding: 15px;
+    border-radius: 20px;
+    width: 20%;
+    
+}
+
+.button:hover {
+    background-color: var(--secondary);
+}
+
+/* question page */
+
+.question-page {
+    margin: 3%;
+    margin-left: 23%;
+    margin-right: 20%;
+}
+
+.question-buttons {
+    margin-top: 2.5%;
+    margin-right: 65%;
+}
+
+.question-btn {
+    width: 100%;
+    /* width: 35%; */
+    margin-bottom: 5%;
+    text-align: left;
+    padding-left: 8%;
+}
+
+.result {
+    margin-top: 4%;
+    font-size: 2.75vw;
+    color: #adb1c5;
+    font-style: italic;
+}
+
+.result-answer {
+    margin: 2%;
+}
+
+/* result page */
+
+.result-page {
+    margin: 3%;
+    margin-left: 23%;
+    margin-right: 20%;
+}
