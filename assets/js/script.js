@@ -2,226 +2,230 @@
 var startQuizBtn = document.querySelector("#button");
 
 // TARGETTING QUESTION BLOCK ELEMENTS
+var landingPage = document.querySelector("#landing-page");
+var questionPage = document.querySelector("#question-page");
+var resultsPage = document.querySelector("#results-page");
+
 var questionTitle = document.querySelector('#question-title');
 var questionButtons = document.querySelector('#question-buttons')
 var optionOne = document.querySelector('#option-one');
 var optionTwo = document.querySelector('#option-two');
 var optionThree = document.querySelector('#option-three');
 var optionFour = document.querySelector('#option-four');
-var resultAnswer = document.querySelector('#result-answer');
+
+var questionResultContainer = document.querySelector('#result-answer');
+var questionResultLastContainer = document.querySelector('#last-result-answer');
 var resultSection = document.querySelector('#result')
-var questionPage = document.querySelector("#question-page");
-var resultsPage = document.querySelector("#results-page");
+var lastResult = document.querySelector('#last-result')
+var timerEl = document.querySelector('#time-display');
+
+// ======================================== QUIZ DATA ========================================
+
+var questions = [
+    {
+        q: 'Commonly used data types DO Not include:',
+        a: 'alerts',
+        one: "strings",
+        two: "booleans",
+        three: "alerts",
+        four: "numbers"
+    },
+    {
+        q: 'The condition in an if / else statement is enclosed with ________.',
+        a: 'paranthesis',
+        one: "quotes",
+        two: "curly brackets",
+        three: "paranthesis",
+        four: "square brackets"
+    },
+    {
+        q: 'Arrays in JavaScript can be used to store ________.',
+        a: 'all of the above',
+        one: "numbers and strings",
+        two: "other arrays",
+        three: "booleans",
+        four: "all of the above"
+    },
+    {
+        q: 'String values must be enclosed within ________ when bein assigned to variables.',
+        a: 'quotes',
+        one: "commas",
+        two: "curly brackets",
+        three: "quotes",
+        four: "paranthesis"
+    },
+    {
+        q: 'A very useful tool used during development and debugging for printing content to the debugger is:',
+        a: 'console.log',
+        one: "JavaScript",
+        two: "terminal/bash",
+        three: "for loops",
+        four: "console.log"
+    }
+]
+
+// ======================================== TIMER ========================================
+
+var countdown;
+
+var timLeft;
+
+countdownStart = function () {
+
+    timeLeft = 60;
+
+    countdown = setInterval(function () {
+
+        if (timeLeft > 0) {
+
+            timerEl.textContent = "Time: " + timeLeft;
+            timeLeft--;
+
+        } else if (timeLeft === 0) {
+
+            timerEl.textContent = "Time: 0";
+            clearInterval(countdown);
+            resultPage();
 
 
+        };
 
-// FUNCTION FOR COUNTDOWN TIMER
+    }, 1000)
+
+}
+
+countdownStop = function () {
+    clearInterval(countdown);
+}
 
 // ======================================== QUESTIONS ========================================
 
-// QUESTION #1
-questionOne = function () {
+var i = 0;
+var correctAnswer = "";
+var questionResult = "";
 
-    // populate question
-    questionTitle.innerHTML = "Commonly used data types DO Not include:";
+// ITERATE THROUGH QUESTIONS
+populateQuestion = function () {
 
-    // populate possible responses
-    optionOne.innerHTML = "1. " + "strings";
-    optionTwo.innerHTML = "2. " + "booleans";
-    optionThree.innerHTML = "3. " + "alerts";
-    optionFour.innerHTML = "4. " + "numbers";
+    for (; i <= questions.length;) {
 
-    // response handeling
-    questionButtons.addEventListener('click', function (event) {
+        // console.log(i);
 
-        // if correct answer is chosen
-        if (event.target.id === "option-three") {
+        if (i === questions.length) {
+            // console.log("done!");
 
-            questionTwo("Correct!")
+            resultPage();
 
-            // if wrong answer is chosen
-        } else {
+            i = 0;
 
-            questionTwo("Wrong!")
-
+            break;
         }
 
-    })
-};
+        // populate question
+        questionTitle.innerHTML = questions[i].q;
 
-// QUESTION #2
-questionTwo = function (result) {
+        // populate possible responses
+        optionOne.innerHTML = "1. " + questions[i].one;
+        optionTwo.innerHTML = "2. " + questions[i].two;
+        optionThree.innerHTML = "3. " + questions[i].three;
+        optionFour.innerHTML = "4. " + questions[i].four;
 
-    // display if previous answer was correct or incorrect
-    resultSection.setAttribute("style", "display:block;");
-    resultAnswer.innerHTML = result;
+        correctAnswer = questions[i].a;
 
-    // populate question
-    questionTitle.innerHTML = "The condition in an if / else statement is enclosed with ________.";
+        i++;
 
-    // populate possible responses
-    optionOne.innerHTML = "1. " + "quotes";
-    optionTwo.innerHTML = "2. " + "curly brackets";
-    optionThree.innerHTML = "3. " + "paranthesis";
-    optionFour.innerHTML = "4. " + "square brackets";
+        break;
 
-    // response handeling
-    questionButtons.addEventListener('click', function (event) {
-
-        // if correct answer is chosen
-        if (event.target.id === "option-three") {
-
-            questionThree("Correct!")
-
-            // if wrong answer is chosen
-        } else {
-
-            questionThree("Wrong!")
-
-        }
-
-    })
+    }
 
 };
 
-// QUESTION #3
-questionThree = function (result) {
+// LOGIC FOR USER ANSWERING QUESTION PROMPTS
+answerQuestion = function (event) {
+    var chosenButton = event.target.innerHTML.slice(3)
 
-    // display if previous answer was correct or incorrect
-    resultAnswer.innerHTML = result;
+    // console.log(chosenButton);
 
-    // populate question
-    questionTitle.innerHTML = "Arrays in JavaScript can be used to store ________.";
+    if (chosenButton === correctAnswer) {
 
-    // populate possible responses
-    optionOne.innerHTML = "1. " + "numbers and string";
-    optionTwo.innerHTML = "2. " + "other arrays";
-    optionThree.innerHTML = "3. " + "booleans";
-    optionFour.innerHTML = "4. " + "all of the above";
+        // declares result variable as user answered correctly
+        questionResult = "Correct!"
 
-    // response handeling
-    questionButtons.addEventListener('click', function (event) {
+        // iterate to next question in array
+        populateQuestion();
 
-        // if correct answer is chosen
-        if (event.target.id === "option-four") {
+        // displays result from previous question on page
+        resultSection.style.display = "block";
+        questionResultContainer.innerHTML = questionResult
 
-            questionFour("Correct!")
+    } else {
 
-            // if wrong answer is chosen
-        } else {
+        // declares result variable as user answered incorrectly
+        questionResult = "Wrong!"
 
-            questionFour("Wrong!")
+        // iterate to next question in array
 
-        }
+        populateQuestion();
 
-    })
+        // displays result from previous question on page
+
+        resultSection.style.display = "block";
+        questionResultContainer.innerHTML = questionResult
+
+    }
 };
 
-// QUESTION #4
-questionFour = function (result) {
 
-    // display if previous answer was correct or incorrect
-    resultAnswer.innerHTML = result;
-
-    // populate question
-    questionTitle.innerHTML = "String values must be enclosed within ________ when bein assigned to variables.";
-
-    // populate possible responses
-    optionOne.innerHTML = "1. " + "commas";
-    optionTwo.innerHTML = "2. " + "curly brackets";
-    optionThree.innerHTML = "3. " + "quotes";
-    optionFour.innerHTML = "4. " + "paranthesis";
-
-    // response handeling
-    questionButtons.addEventListener('click', function (event) {
-
-        // if correct answer is chosen
-        if (event.target.id === "option-three") {
-
-            questionFive("Correct!")
-
-            // if wrong answer is chosen
-        } else {
-
-            questionFive("Wrong!")
-
-        }
-
-    })
-};
-
-// QUESTION #5
-questionFive = function (result) {
-
-    // display if previous answer was correct or incorrect
-    resultAnswer.innerHTML = result;
-
-    // populate question
-    questionTitle.innerHTML = "A very useful tool used during development and debugging for printing content to the debugger is:";
-
-    // populate possible responses
-    optionOne.innerHTML = "1. " + "JavaScript";
-    optionTwo.innerHTML = "2. " + "terminal/bash";
-    optionThree.innerHTML = "3. " + "for loops";
-    optionFour.innerHTML = "4. " + "console.log";
-
-    // response handeling
-    questionButtons.addEventListener('click', function (event) {
-
-        // if correct answer is chosen
-        if (event.target.id === "option-four") {
-
-            resultPage("Correct!")
-
-            // if wrong answer is chosen
-        } else {
-
-            resultPage("Wrong!")
-
-        }
-
-    })
-
-};
-
-//  ======================================== RESULTS  ========================================
+//  ======================================== RESULTS ========================================
 
 // QUESTIONS END - SHOW RESULTS
 resultPage = function (result) {
-    // hide questions section
-    questionPage.style.display = "none";
 
-    // display results page
-    resultsPage.style.display = "none";
+    // if result page pops up before last question is answered
+    if (!result) {
+
+        lastResult.style.display = "none"
+
+        // hide questions section
+        questionPage.style.display = "none";
+
+        // display results page
+        resultsPage.style.display = "block";
 
 
-    // display if previous answer was correct or incorrect
-    resultAnswer.innerHTML = result;
+        // displays the last question response on result page
+    } else if (result) {
+
+        // hide questions section
+        questionPage.style.display = "none";
+
+        // display results page
+        resultsPage.style.display = "block";
+
+        // display if previous answer was correct or incorrect
+        resultAnswerLast.innerHTML = questionResult;
+
+    }
+
+    countdownStop();
+
 };
 
 //  ======================================== STARTER LOGIC  ========================================
 
-// G0 THROUGH QUESTIONS
-askQuestions = function () {
-
-    // display question box
-    questionPage.style.display = "block";
-
-    // calling the first question
-    questionOne();
-
-};
 
 // FUNCTION FOR CLEARING THE LANDING PAGE AND CALLING THE ASKQUESTIONS() FUNCTION
 startQuiz = function () {
 
-    var landingPage = document.querySelector("#landing-page");
-
     landingPage.setAttribute("style", "display:none;")
 
-    askQuestions();
+    questionPage.setAttribute("style", "display:block;")
 
-    // startTimer()'
+    populateQuestion();
+
+    countdownStart();
 };
 
 startQuizBtn.addEventListener("click", startQuiz);
+
+questionButtons.addEventListener("click", answerQuestion);
