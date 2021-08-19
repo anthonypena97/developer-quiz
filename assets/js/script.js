@@ -375,6 +375,9 @@ saveScore = function () {
 
         highScores();
 
+        // resets input field after saving
+        scoreInitials.value = "";
+
     }
 
 
