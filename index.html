@@ -18,7 +18,7 @@
 
 	<!-- timer nav -->
 
-	<nav>
+	<nav id="nav">
 		<div id="high-scores" class="high-scores nav-style">
 			<p>View high scores</p>
 		</div>
@@ -79,12 +79,12 @@
 		<section id="results-page" class="results-page" style="display:none;">
 			<div class="results-container">
 				<h1>All done!</h1>
-				<p>Your final score is 22.</p>
+				<p id="score"></p>
 
 				<div class="results-submit-form">
 					<label>Enter initials:</label>
-					<input>
-					<button class="submit-button">Submit</button>
+					<input id="initials-input">
+					<button id="submit-score" class="submit-button">Submit</button>
 
 				</div>
 
@@ -97,6 +97,13 @@
 
 			</div>
 
+		</section>
+
+
+		<!-- high scores -->
+
+		<section id="scores-page" class="results-page" sstyle="display:none;">
+			<h1>High Scores</h1>
 		</section>
 
 

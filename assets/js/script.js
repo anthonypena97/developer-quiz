@@ -2,22 +2,36 @@
 var startQuizBtn = document.querySelector("#button");
 
 // TARGETTING QUESTION BLOCK ELEMENTS
-var landingPage = document.querySelector("#landing-page");
-var questionPage = document.querySelector("#question-page");
-var resultsPage = document.querySelector("#results-page");
 
+// LANDING PAGE VARIABLES
+var nav = document.querySelector('#nav')
+var landingPage = document.querySelector("#landing-page");
+var timerEl = document.querySelector('#time-display');
+var scoreContainer = document.querySelector('#score');
+
+// QUESTION PAGE VARIABLES
+var questionPage = document.querySelector("#question-page");
 var questionTitle = document.querySelector('#question-title');
-var questionButtons = document.querySelector('#question-buttons')
+var questionButtons = document.querySelector('#question-buttons');
 var optionOne = document.querySelector('#option-one');
 var optionTwo = document.querySelector('#option-two');
 var optionThree = document.querySelector('#option-three');
 var optionFour = document.querySelector('#option-four');
-
 var questionResultContainer = document.querySelector('#result-answer');
 var questionResultLastContainer = document.querySelector('#last-result-answer');
-var resultSection = document.querySelector('#result')
-var lastResult = document.querySelector('#last-result')
-var timerEl = document.querySelector('#time-display');
+
+// RESULTS PAGE
+var resultsPage = document.querySelector('#results-page');
+var resultSection = document.querySelector('#result');
+var lastResult = document.querySelector('#last-result');
+var submitScore = document.querySelector("#submit-score");
+var scoreInitials = document.querySelector('#initials-input');
+
+// SCORES PAGE
+var scoresPage = document.querySelector("#scores-page");
+
+// STORAGE
+var scores = [];
 
 // ======================================== QUIZ DATA ========================================
 
@@ -67,8 +81,9 @@ var questions = [
 // ======================================== TIMER ========================================
 
 var countdown;
+var timeLeft;
+var score;
 
-var timLeft;
 
 countdownStart = function () {
 
@@ -76,18 +91,19 @@ countdownStart = function () {
 
     countdown = setInterval(function () {
 
+        // console.log("function, ", timeLeft)
+
         if (timeLeft > 0) {
 
             timerEl.textContent = "Time: " + timeLeft;
             timeLeft--;
 
-        } else if (timeLeft === 0) {
+        } else if (timeLeft <= 0) {
 
             timerEl.textContent = "Time: 0";
-            clearInterval(countdown);
+
+            countdownStop();
             resultPage();
-
-
         };
 
     }, 1000)
@@ -109,12 +125,10 @@ populateQuestion = function () {
 
     for (; i <= questions.length;) {
 
-        // console.log(i);
-
+        // logic for button click on last question - calls the result page
         if (i === questions.length) {
-            // console.log("done!");
 
-            resultPage();
+            resultPage(questionResult);
 
             i = 0;
 
@@ -144,7 +158,7 @@ populateQuestion = function () {
 answerQuestion = function (event) {
     var chosenButton = event.target.innerHTML.slice(3)
 
-    // console.log(chosenButton);
+    // compares user choice to the correct answer for corresponding question object
 
     if (chosenButton === correctAnswer) {
 
@@ -159,6 +173,13 @@ answerQuestion = function (event) {
         questionResultContainer.innerHTML = questionResult
 
     } else {
+
+        // console.log("input,", timeLeft)
+
+        // deduct time when question is answered wrong
+        timeLeft = timeLeft - 15;
+
+        // console.log("output, ", timeLeft)
 
         // declares result variable as user answered incorrectly
         questionResult = "Wrong!"
@@ -180,6 +201,19 @@ answerQuestion = function (event) {
 
 // QUESTIONS END - SHOW RESULTS
 resultPage = function (result) {
+
+    // push the current timeLeft into score variable
+    score = timeLeft;
+
+    if (score <= 0) {
+
+        scoreContainer.innerHTML = "Your final score is 0 !";
+
+    } else if (score > 0) {
+
+        scoreContainer.innerHTML = "Your final score is " + score + "!";
+
+    }
 
     // if result page pops up before last question is answered
     if (!result) {
@@ -203,13 +237,66 @@ resultPage = function (result) {
         resultsPage.style.display = "block";
 
         // display if previous answer was correct or incorrect
-        resultAnswerLast.innerHTML = questionResult;
+        questionResultLastContainer.innerHTML = questionResult
 
     }
 
-    countdownStop();
+    // a delay in order to let timer update one last time
+    setTimeout(countdownStop, 1000)
 
 };
+
+//  ======================================== HIGH SCORES  ========================================
+
+highScores = function () {
+
+
+    // clear pages
+    nav.style.display = "none";
+
+    landingPage.style.display = "none";
+
+    questionPage.style.display = "none";
+
+    resultsPage.style.display = "none";
+
+    // show high score page elements
+    scoresPage.style.display = "block";
+
+}
+
+
+//  ======================================== STORAGE  ========================================
+
+saveScore = function () {
+
+    let userInitials = scoreInitials.value.toUpperCase();
+
+    // input validation
+    if (!userInitials) {
+
+        alert("Please enter your initials!")
+
+    } else {
+
+        let saveUser = {
+            initials: userInitials,
+            score: score
+        };
+
+        scores.push(saveUser);
+
+        // console.log(scores);
+
+        localStorage.setItem("scores", JSON.stringify(scores));
+
+        highScores();
+
+    }
+
+
+}
+
 
 //  ======================================== STARTER LOGIC  ========================================
 
@@ -229,3 +316,5 @@ startQuiz = function () {
 startQuizBtn.addEventListener("click", startQuiz);
 
 questionButtons.addEventListener("click", answerQuestion);
+
+submitScore.addEventListener("click", saveScore);
