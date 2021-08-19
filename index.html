@@ -19,8 +19,10 @@
 	<!-- timer nav -->
 
 	<nav id="nav">
-		<div id="high-scores" class="high-scores nav-style">
-			<p>View high scores</p>
+		<div id="view-scores" class="view-scores nav-style">
+			<a href="" style="text-decoration:none;" onclick="return false;">
+				<p>View high scores</p>
+			</a>
 		</div>
 		<div id="time-display" class="time-display nav-style">
 			<p>Time: 0</p>
@@ -66,7 +68,7 @@
 				</div>
 
 				<div id="result" class="result" style="display:none;">
-					<hr>
+					<hr id="hr">
 					<p id="result-answer" class="result-answer"></p>
 				</div>
 
@@ -102,22 +104,29 @@
 
 		<!-- high scores -->
 
-		<section id="scores-page" class="results-page" sstyle="display:none;">
-			<h1>High Scores</h1>
+		<section id="scores-page" style="display:none;">
+
+			<div class="scores-page">
+
+				<div>
+					<h1>High scores</h1>
+				</div>
+
+				<div id="scores">
+
+					<!-- <p class="score-entry">1. AB - 22</p> -->
+				</div>
+
+				<div id="score-buttons" class="score-buttons">
+
+					<button id="back-btn">Go back</button>
+
+					<button id="clear-btn">Clear high scores</button>
+				</div>
+
+			</div>
+
 		</section>
-
-
-
-		<!-- finish page -->
-
-		<section id=" question-page">
-		</section>
-
-		<!-- high scores page -->
-
-		<section id="question-page">
-		</section>
-
 
 	</main>
 

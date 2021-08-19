@@ -8,6 +8,7 @@ var nav = document.querySelector('#nav')
 var landingPage = document.querySelector("#landing-page");
 var timerEl = document.querySelector('#time-display');
 var scoreContainer = document.querySelector('#score');
+var viewScores = document.querySelector("#view-scores");
 
 // QUESTION PAGE VARIABLES
 var questionPage = document.querySelector("#question-page");
@@ -18,17 +19,22 @@ var optionTwo = document.querySelector('#option-two');
 var optionThree = document.querySelector('#option-three');
 var optionFour = document.querySelector('#option-four');
 var questionResultContainer = document.querySelector('#result-answer');
-var questionResultLastContainer = document.querySelector('#last-result-answer');
+var resultSection = document.querySelector('#result');
+var hr = document.querySelector("#hr")
+
 
 // RESULTS PAGE
+var questionResultLastContainer = document.querySelector('#last-result-answer');
 var resultsPage = document.querySelector('#results-page');
-var resultSection = document.querySelector('#result');
 var lastResult = document.querySelector('#last-result');
 var submitScore = document.querySelector("#submit-score");
 var scoreInitials = document.querySelector('#initials-input');
 
 // SCORES PAGE
 var scoresPage = document.querySelector("#scores-page");
+var backButton = document.querySelector("#back-btn");
+var clearButton = document.querySelector("#clear-btn");
+var savedScoresContainer = document.querySelector("#scores");
 
 // STORAGE
 var scores = [];
@@ -130,6 +136,9 @@ populateQuestion = function () {
 
             resultPage(questionResult);
 
+            // reset the questionResult to empty
+            questionResult = "";
+
             i = 0;
 
             break;
@@ -146,9 +155,24 @@ populateQuestion = function () {
 
         correctAnswer = questions[i].a;
 
-        i++;
+        i++
 
-        break;
+        break
+
+        // if (i === 0) {
+
+        //     i++;
+
+        break
+
+        // } else if (i > 0) {
+
+        //     i++;
+
+        //     break;
+
+        // }
+
 
     }
 
@@ -204,6 +228,8 @@ resultPage = function (result) {
 
     // push the current timeLeft into score variable
     score = timeLeft;
+
+    // resultSection.style.display = "none";
 
     if (score <= 0) {
 
@@ -263,10 +289,67 @@ highScores = function () {
     // show high score page elements
     scoresPage.style.display = "block";
 
+    // populate page with loaded scores
+    loadScoresElements();
+
+};
+
+loadScoresElements = function () {
+
+    // clear previous saved score elements  
+    savedScoresContainer.innerHTML = "";
+
+    for (n = 0; n < scores.length; n++) {
+
+        numberScore = n + 1
+
+        var scoreElement = document.createElement("p")
+
+        scoreElement.setAttribute("class", "score-entry")
+
+        scoreElement.innerHTML = numberScore + ". " + scores[n].initials + " - " + scores[n].score;
+
+        savedScoresContainer.appendChild(scoreElement);
+
+    }
+
 }
 
+//  ======================================== STORAGE LOGIC ========================================
 
-//  ======================================== STORAGE  ========================================
+loadScores = function () {
+
+    var savedScores = localStorage.getItem("dev-quiz-scores");
+
+    // if localstorage is empty - saves scores array as empty
+    if (savedScores === null) {
+
+        scores = [];
+
+    } else {
+
+        var savedScoresJSON = JSON.parse(savedScores);
+
+        for (a = 0; a < savedScoresJSON.length; a++) {
+
+            scores.push(savedScoresJSON[a])
+        }
+
+    }
+
+}
+
+clearScores = function () {
+
+    // updates scores array to empty
+    scores = [];
+
+    // sets localstorage as empty
+    localStorage.removeItem("dev-quiz-scores")
+
+    loadScoresElements();
+
+}
 
 saveScore = function () {
 
@@ -288,7 +371,7 @@ saveScore = function () {
 
         // console.log(scores);
 
-        localStorage.setItem("scores", JSON.stringify(scores));
+        localStorage.setItem("dev-quiz-scores", JSON.stringify(scores));
 
         highScores();
 
@@ -300,6 +383,19 @@ saveScore = function () {
 
 //  ======================================== STARTER LOGIC  ========================================
 
+loadPage = function () {
+
+    timerEl.textContent = "Time: 0";
+
+    scoresPage.style.display = "none";
+
+    nav.style.display = "block";
+
+    landingPage.style.display = "block";
+
+    resultSection.style.display = "none";
+
+};
 
 // FUNCTION FOR CLEARING THE LANDING PAGE AND CALLING THE ASKQUESTIONS() FUNCTION
 startQuiz = function () {
@@ -311,10 +407,26 @@ startQuiz = function () {
     populateQuestion();
 
     countdownStart();
+
 };
+
+//  ======================================== PAGE BUTTONS  ========================================
+// 
 
 startQuizBtn.addEventListener("click", startQuiz);
 
 questionButtons.addEventListener("click", answerQuestion);
 
 submitScore.addEventListener("click", saveScore);
+
+viewScores.addEventListener("click", highScores);
+
+backButton.addEventListener("click", loadPage);
+
+clearButton.addEventListener("click", clearScores);
+
+//  ======================================== PAGE CALLS ========================================
+
+loadPage();
+
+loadScores();
