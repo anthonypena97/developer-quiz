@@ -34,7 +34,7 @@ ex. [anthonypena97](https://github.com/anthonypena97)
     
 * 0.1
     * Initial Release
-    * * See [commit change](https://github.com/anthonypena97/spotify-library/commits/main) or See [release history](https://github.com/anthonypena97/spotify-library/releases)
+    * * See [commit change](https://github.com/anthonypena97/developer-quiz/commits/main) or See [release history](https://github.com/anthonypena97/developer-quiz/releases)
 
 ## Acknowledgments
 
