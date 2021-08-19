@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="./assets/css/style.css">
+	<title>Coding Quiz</title>
+</head>
+
+<body>
+
+	<!-- timer nav -->
+
+	<nav id="nav">
+		<div id="view-scores" class="view-scores nav-style">
+			<a href="" style="text-decoration:none;" onclick="return false;">
+				<p>View high scores</p>
+			</a>
+		</div>
+		<div id="time-display" class="time-display nav-style">
+			<p>Time: 0</p>
+		</div>
+	</nav>
+
+	<main class="main">
+
+		<!-- landing page -->
+
+		<section id="landing-page" style=" display:block">
+			<div class="content-container">
+				<h1 class="title">Coding Quiz Challenge</h1>
+			</div>
+
+			<div class="content-container">
+				<p class="paragraph">Try to answer the following code-related questions within the time limit. Keep in
+					mind that
+					incorrect answers
+					will penalize your score/time <br> by ten seconds!</p>
+			</div>
+
+			<div class="button-container">
+				<button id="button" class="button">Start Quiz</button>
+			</div>
+		</section>
+
+
+		<!-- question page -->
+
+		<section id="question-page" class="question-page" style="display:none">
+			<div class="questions">
+				<div>
+					<h1 id="question-title" class="title">
+						<h1>
+				</div>
+
+				<div id="question-buttons" class="question-buttons">
+					<button id="option-one" class="button question-btn"></button>
+					<button id="option-two" class="button question-btn"></button>
+					<button id="option-three" class="button question-btn"></button>
+					<button id="option-four" class="button question-btn"></button>
+				</div>
+
+				<div id="result" class="result" style="display:none;">
+					<hr id="hr">
+					<p id="result-answer" class="result-answer"></p>
+				</div>
+
+			</div>
+
+		</section>
+
+		<!-- result page -->
+
+		<section id="results-page" class="results-page" style="display:none;">
+			<div class="results-container">
+				<h1>All done!</h1>
+				<p id="score"></p>
+
+				<div class="results-submit-form">
+					<label>Enter initials:</label>
+					<input id="initials-input">
+					<button id="submit-score" class="submit-button">Submit</button>
+
+				</div>
+
+			</div>
+
+			<div id="last-result" class="result" style="display:block;">
+				<hr>
+				<p id="last-result-answer" class="result-answer"></p>
+			</div>
+
+			</div>
+
+		</section>
+
+
+		<!-- high scores -->
+
+		<section id="scores-page" style="display:none;">
+
+			<div class="scores-page">
+
+				<div>
+					<h1>High scores</h1>
+				</div>
+
+				<div id="scores">
+
+					<!-- <p class="score-entry">1. AB - 22</p> -->
+				</div>
+
+				<div id="score-buttons" class="score-buttons">
+
+					<button id="back-btn">Go back</button>
+
+					<button id="clear-btn">Clear high scores</button>
+				</div>
+
+			</div>
+
+		</section>
+
+	</main>
+
+
+
+	<script src="./assets/js/script.js"></script>
+</body>
+
+
+</html>

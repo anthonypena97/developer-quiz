@@ -1,0 +1,68 @@
+body {
+    margin: 10px;
+    padding: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav {
+    /* display: flex; */
+    width: 100%;
+    font-size: 1.5vw;
+}
+
+
+.main div {
+    width: 100%;
+}
+
+
+.content-container h1, .content-container p, .content-container button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.content-container h1 {
+    font-size: 3vw;
+}
+
+.content-container p {
+    padding-left: 30%;
+    padding-right: 30%;
+
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.button{
+    background-color: var(--primary);
+    color: white;
+    /* font-size: 1vw; */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.button:hover {
+    background-color: var(--secondary);
+}
+
+.high-scores {
+    color: var(--secondary);
+    flex:1;
+    float:left;
+}
+
+.time-display {
+    flex:1;
+    float:right;
+}
+
+.time-display p {
+    float: right;
+}

@@ -1,0 +1,175 @@
+*{
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0;
+}
+
+:root {
+    --primary: #351c75;
+    --secondary: #bd60e7;
+    --tertiary: #d8d3e9;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    margin: 40px;
+}
+
+nav{
+font-size: 1.5vw;
+margin-bottom: 4%;
+}
+
+.nav-style {
+    display: flex;
+}
+
+.view-scores {
+    float: left;
+    color: var(--secondary);
+}
+
+.time-display {
+    float: right;
+}
+
+.content-container, .button-container {
+    display: flex;
+    margin: 1.75%;
+    justify-content: center;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 3.25vw;
+    line-height: 120%;
+}
+
+.paragraph {
+    font-size: 2vw;
+    text-align: center;
+    font-weight: 300;
+    line-height: 115%;
+}
+
+.button{
+    font-family: Roboto, sans-serif;
+    background-color: var(--primary);
+    color: white;
+    font-size: 2vw;
+    padding: 15px;
+    border-radius: 20px;
+    width: 20%;
+}
+
+.button:hover {
+    background-color: var(--secondary);
+}
+
+/* question page */
+
+.question-page {
+    margin: 3%;
+    margin-left: 23%;
+    margin-right: 20%;
+}
+
+.question-buttons {
+    margin-top: 2.5%;
+    margin-right: 65%;
+}
+
+.question-btn {
+    width: 100%;
+    /* width: 35%; */
+    margin-bottom: 5%;
+    text-align: left;
+    padding-left: 8%;
+}
+
+.result {
+    margin-top: 4%;
+    font-size: 2.75vw;
+    color: #adb1c5;
+    font-style: italic;
+}
+
+.result-answer {
+    margin: 2%;
+}
+
+/* result page */
+
+.results-page {
+    margin: 1%;
+    margin-left: 23%;
+    margin-right: 20%;
+
+}
+
+.results-container {
+    font-size: 2.5vw;
+}
+
+.results-container h1 , .results-container p{
+    margin-bottom: 4%;
+}
+
+.results-submit-form input {
+    padding: 1%;
+    width: 50%;
+    line-height: 100%;
+    font-size: 2vw;
+}
+
+.submit-button{
+    /* height:auto; */
+    font-family: Roboto, sans-serif;
+    background-color: var(--primary);
+    color: white;
+    font-size: 2vw;
+    padding: 5px;
+    border-radius: 10px;
+    width: 20%;
+    margin-left: 8px;
+}
+
+/* high scores page */
+
+.scores-page {
+    margin-top: 8%;
+    margin-left: 23%;
+    margin-right: 20%;
+}
+
+.scores-page h1 {
+    font-size: 3.25vw;
+}
+
+.scores-page div{
+    margin-bottom: 3%;
+}
+
+.score-entry {
+    background-color: var(--tertiary);
+    font-size: 1.75vw;
+    font-weight: 400;
+    padding: 1.5%;
+}
+
+.score-buttons button {
+    color: white;
+    background-color: var(--primary);
+    font-size: 2vw;
+    padding: 1%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    border-radius: 10px;
+    margin-right:1%;
+}
+
+.score-buttons button:hover {
+    background-color: var(--secondary);
+}
