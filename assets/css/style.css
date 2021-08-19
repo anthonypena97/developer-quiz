@@ -7,6 +7,7 @@
 :root {
     --primary: #351c75;
     --secondary: #bd60e7;
+    --tertiary: #d8d3e9;
 }
 
 body {
@@ -23,7 +24,7 @@ margin-bottom: 4%;
     display: flex;
 }
 
-.high-scores {
+.view-scores {
     float: left;
     color: var(--secondary);
 }
@@ -133,4 +134,42 @@ margin-bottom: 4%;
     border-radius: 10px;
     width: 20%;
     margin-left: 8px;
+}
+
+/* high scores page */
+
+.scores-page {
+    margin-top: 8%;
+    margin-left: 23%;
+    margin-right: 20%;
+}
+
+.scores-page h1 {
+    font-size: 3.25vw;
+}
+
+.scores-page div{
+    margin-bottom: 3%;
+}
+
+.score-entry {
+    background-color: var(--tertiary);
+    font-size: 1.75vw;
+    font-weight: 400;
+    padding: 1.5%;
+}
+
+.score-buttons button {
+    color: white;
+    background-color: var(--primary);
+    font-size: 2vw;
+    padding: 1%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    border-radius: 10px;
+    margin-right:1%;
+}
+
+.score-buttons button:hover {
+    background-color: var(--secondary);
 }
